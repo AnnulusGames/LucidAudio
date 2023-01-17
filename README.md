@@ -14,7 +14,6 @@ Lucid Audio is a library that handles audio playback in Unity. You can easily de
 * Simple description method using method chaining
 * Advanced settings such as delays and callbacks
 * Play/stop timing can be linked to GameObject
-* Create playlist
 
 ### Requirement
 * Unity 2019.4 or higher
@@ -280,69 +279,6 @@ async UniTask MethodAsync(CancellationToken token = default)
     }
 }
 ```
-
-
-## Playlist
-By using the Playlist class, you can create a playlist containing multiple sounds. A Playlist has an AudioClip as an element, and elements can be added/deleted like a normal list.
-
-```cs
-public AudioClip clip;
-
-private void Start()
-{
-    // create a new playlist
-    Playlist playlist = new Playlist();
-
-    // add element
-    playlist.Add(clip);
-
-    // play playlist
-    playlist.Play();
-}
-```
-
-Use Pause/UnPause to pause/resume playback.
-
-```cs
-// Pause playlist playback
-playlist.Pause();
-
-// Resume playlist playback
-playlist.UnPause();
-```
-If you want to skip a clip or play the previous clip, use PlayNext/PlayPrevious.
-
-```cs
-// Play previous clip (play from beginning if not already played)
-playlist.PlayPrevious();
-
-// play next clip (stop if next clip doesn't exist)
-playlist.PlayNext();
-```
-
-Use PlayShuffle for shuffle playback. The playback order of sounds is set when PlayShuffle is called, and the order does not change even if you call PlayNext or PlayPrevious until Play or PlayShuffle is called again.
-
-```cs
-// Shuffle Play
-playlist.PlayShuffle();
-```
-You can get the AudioPlayer currently held by the Playlist from the player property.
-A Playlist creates an AudioPlayer each time it starts playing, and disposes it when it finishes playing.
-
-```cs
-playlist.player.SetVolume(0.5f);
-```
-
-By changing the AudioType, you can set whether to treat the clip as BGM or SE.
-
-```cs
-// Play clip using LucidAudio.PlaySE
-playlist.audioType = AudioType.SE;
-```
-
-Also, Playlist can be edited from the Inspector.
-
-<img src="https://github.com/AnnulusGames/LucidAudio/blob/main/Assets/LucidAudio/Documentation~/img1.png" width="500">
 
 ## ライセンス
 

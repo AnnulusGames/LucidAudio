@@ -47,9 +47,6 @@ namespace AnnulusGames.LucidTools.Audio
             }
         }
 
-        public int maxBGMCount = 5;
-        public int maxSECount = 50;
-
         internal static void Initialize()
         {
             if (instance != null)

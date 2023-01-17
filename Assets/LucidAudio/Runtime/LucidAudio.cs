@@ -32,28 +32,6 @@ namespace AnnulusGames.LucidTools.Audio
 
         public static float BGMVolume { get; set; } = 1f;
         public static float SEVolume { get; set; } = 1f;
-        public static int MaxBGMCount
-        {
-            get
-            { 
-                return LucidAudioManager.Instance.maxBGMCount; 
-            }
-            set
-            {
-                LucidAudioManager.Instance.maxBGMCount = value;
-            }
-        }
-        public static int MaxSECount
-        {
-            get
-            {
-                return LucidAudioManager.Instance.maxSECount;
-            }
-            set
-            {
-                LucidAudioManager.Instance.maxSECount = value;
-            }
-        }
 
         public static AudioMixerGroup defaultBGMMixerGroup = null;
         public static AudioMixerGroup defaultSEMixerGroup = null;

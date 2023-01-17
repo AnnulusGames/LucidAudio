@@ -14,7 +14,6 @@ Lucid Audioは、Unityにおけるオーディオの再生を扱うライブラ�
 * メソッドチェーンを用いたシンプルな記述方式
 * 遅延やコールバックなどの高度な設定
 * 再生・停止のタイミングをGameObjectに紐付け可能
-* プレイリストの作成
 
 ## セットアップ
 
@@ -282,70 +281,6 @@ async UniTask MethodAsync(CancellationToken token = default)
     }
 }
 ```
-
-## Playlist
-Playlistクラスを利用することで、複数のサウンドをまとめたプレイリストを作成できます。PlaylistはAudioclipを要素として持ち、通常のリストのように要素の追加・削除を行うことができます。
-
-```cs
-public AudioClip clip;
-
-private void Start()
-{
-    // 新たなプレイリストを作成
-    Playlist playlist = new Playlist();
-
-    // 要素を追加
-    playlist.Add(clip);
-
-    // プレイリストを再生
-    playlist.Play();
-}
-```
-
-再生を一時停止・再開したい場合はPause・UnPauseを利用します。
-
-```cs
-// プレイリストの再生を一時停止
-playlist.Pause();
-
-// プレイリストの再生を再開
-playlist.UnPause();
-```
-
-サウンドをスキップしたり、前のサウンドを再生したい場合にはPlayNext・PlayPreviousを利用します。
-
-```cs
-// 前のサウンドを再生 (再生していない場合は最初から再生)
-playlist.PlayPrevious();
-
-// 次のサウンドを再生 (次のサウンドが存在しない場合は停止)
-playlist.PlayNext();
-```
-
-シャッフル再生を行うにはPlayShuffleを利用します。サウンドの再生順はPlayShuffleが呼ばれた時点で設定され、再びPlay・PlayShuffleが呼ばれるまでは、PlayNextやPlayPreviousを呼んでも順番は変わりません。
-
-```cs
-// シャッフル再生
-playlist.PlayShuffle();
-```
-
-playerプロパティから現在Playlistが保持するAudioPlayerを取得できます。
-Playlistは再生を開始するたびにAudioPlayerを生成し、再生が終了するとそれを破棄します。
-
-```cs
-playlist.player.SetVolume(0.5f);
-```
-
-AudioTypeを変更することで、BGM・SEのどちらとしてサウンドを扱うかを設定できます。
-
-```cs
-// LucidAudio.PlaySEを利用してサウンドを再生する
-playlist.audioType = AudioType.SE;
-```
-
-また、PlaylistはInspector上から編集が可能です。
-
-<img src="https://github.com/AnnulusGames/LucidAudio/blob/main/Assets/LucidAudio/Documentation~/img1.png" width="500">
 
 ## ライセンス
 
