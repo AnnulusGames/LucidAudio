@@ -8,7 +8,7 @@
         "name": "Annulus Games",
         "url": "https://github.com/AnnulusGames"
     },
-    "description": "Simple sound manager for Unity",
+    "description": "Simple audio player for Unity",
     "dependencies": {
 
     }
