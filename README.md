@@ -125,19 +125,19 @@ player.Stop();
 Lucid Audio makes it easy to set callbacks using methods.
 Below is a list of callbacks that can be set on the AudioPlayer.
 
-### ・OnStart
+### OnStart
 Called at the moment the audio starts playing. If a delay is set with SetDelay, it will be called when the delay ends.
 
-### ・OnPlay
+### OnPlay
 Called every frame while audio is playing. Not called while paused.
 
-### ・OnPause
+### OnPause
 Called when the audio is paused.
 
-### ・OnComplete
+### OnComplete
 Called when the audio has finished playing. It is not called if you stop playback with Stop.
 
-### ・OnStop
+### OnStop
 Called when the audio has stopped. Also called on completion if SetAutoStop is not set.
 
 ## 3D Sound
