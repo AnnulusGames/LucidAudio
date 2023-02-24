@@ -129,6 +129,7 @@ namespace AnnulusGames.LucidTools.Audio
 
         private void ReleaseAudioSource(AudioSource source, AudioType audioType)
         {
+            if (source == null) return;
             var pool = GetAudioSourcePool(audioType);
             if (pool.Contains(source)) return;
 
@@ -154,9 +155,9 @@ namespace AnnulusGames.LucidTools.Audio
             AudioPlayer audioPlayer;
             var pool = GetAudioSourcePool(audioType);
 
-            if (pool.Count > 0)
+            if (pool.TryDequeue(out var source))
             {
-                audioPlayer = new AudioPlayer(pool.Dequeue(), audioType, clip);
+                audioPlayer = new AudioPlayer(source, audioType, clip);
             }
             else
             {
