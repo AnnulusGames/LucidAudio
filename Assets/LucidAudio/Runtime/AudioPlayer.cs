@@ -156,6 +156,7 @@ namespace AnnulusGames.LucidTools.Audio
         private void UpdateFadeVolume()
         {
             if (!isFadeVolumePlaying) return;
+            if (audioSource == null) return;
 
             float fadeTime = Time.realtimeSinceStartup - fadeVolumeStartTime;
             SetVolume(Mathf.Lerp(fadeVolumeStartValue, fadeVolumeEndValue, Mathf.InverseLerp(0, fadeVolumeDuration, fadeTime)));
@@ -168,6 +169,7 @@ namespace AnnulusGames.LucidTools.Audio
         private void UpdateFadePitch()
         {
             if (!isFadePitchPlaying) return;
+            if (audioSource == null) return;
 
             float fadeTime = Time.realtimeSinceStartup - fadePitchStartTime;
             SetPitch(Mathf.Lerp(fadePitchStartValue, fadePitchEndValue, Mathf.InverseLerp(0, fadePitchDuration, fadeTime)));
