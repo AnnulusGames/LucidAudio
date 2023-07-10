@@ -525,7 +525,18 @@ namespace AnnulusGames.LucidTools.Audio
             {
                 fadeVolumeStartTime = Time.realtimeSinceStartup;
                 fadeVolumeDuration = duration;
-                fadeVolumeStartValue = audioSource.volume;
+                switch (audioType)
+                {
+                    default:
+                        fadeVolumeStartValue = audioSource.volume;
+                        break;
+                    case AudioType.BGM:
+                        fadeVolumeStartValue = LucidAudio.BGMVolume == 0 ? 1 : (audioSource.volume / LucidAudio.BGMVolume);
+                        break;
+                    case AudioType.SE:
+                        fadeVolumeStartValue = LucidAudio.SEVolume == 0 ? 1 : (audioSource.volume / LucidAudio.SEVolume);
+                        break;
+                }
                 fadeVolumeEndValue = endValue;
 
                 onFadeVolumeComplete = callback;
