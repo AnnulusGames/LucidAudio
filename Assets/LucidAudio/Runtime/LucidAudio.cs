@@ -33,8 +33,25 @@ namespace AnnulusGames.LucidTools.Audio
         public static float BGMVolume { get; set; } = 1f;
         public static float SEVolume { get; set; } = 1f;
 
-        public static AudioMixerGroup defaultBGMMixerGroup = null;
-        public static AudioMixerGroup defaultSEMixerGroup = null;
+        public static AudioMixerGroup defaultBGMMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.BGM];
+            set => MixerGroups[(int)AudioType.BGM] = value;
+        }
+
+        public static AudioMixerGroup defaultSEMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.SE];
+            set => MixerGroups[(int)AudioType.SE] = value;
+        }
+
+        public static AudioMixerGroup defaultSpatialSEMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.SpatialSE];
+            set => MixerGroups[(int)AudioType.SpatialSE] = value;
+        }
+        
+        public static readonly AudioMixerGroup[] MixerGroups = new AudioMixerGroup[3];
 
         public static AudioPlayer[] GetPlayers()
         {
@@ -53,7 +70,7 @@ namespace AnnulusGames.LucidTools.Audio
 
         public static AudioPlayer Play(AudioType type, AudioClip clip, float fadeInDuration = 0f)
         {
-            return LucidAudioManager.Instance.Play(type, clip, fadeInDuration).SetAudioMixerGroup(defaultSEMixerGroup);
+            return LucidAudioManager.Instance.Play(type, clip, fadeInDuration).SetAudioMixerGroup(MixerGroups[(int)type]);
         }
 
         public static AudioPlayer PlayBGM(AudioClip clip, float fadeInDuration = 0f)
@@ -64,7 +81,10 @@ namespace AnnulusGames.LucidTools.Audio
         {
             return Play(AudioType.SE, clip, fadeInDuration);
         }
-        
+        public static AudioPlayer PlaySpatial(AudioClip clip, float fadeInDuration = 0f)
+        {
+            return Play(AudioType.SpatialSE, clip, fadeInDuration);
+        }
         public static void RestartAllBGM()
         {
             LucidAudioManager.Instance.Restart(AudioType.BGM);

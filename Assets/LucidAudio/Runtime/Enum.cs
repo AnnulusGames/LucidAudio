@@ -2,8 +2,9 @@ namespace AnnulusGames.LucidTools.Audio
 {
     public enum AudioType
     {
-        BGM,
-        SE
+        BGM       =0,
+        SE        =1,
+        SpatialSE =2
     }
 
     public enum AudioCancelBehaviour
