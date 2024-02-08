@@ -368,6 +368,9 @@ namespace AnnulusGames.LucidTools.Audio
                 case AudioType.SE:
                     audioSource.volume = volume * LucidAudio.SEVolume;
                     break;
+                case AudioType.SpatialSE:
+                    audioSource.volume = volume * LucidAudio.SpatialVolume;
+                    break;
             }
             return this;
         }
@@ -535,6 +538,9 @@ namespace AnnulusGames.LucidTools.Audio
                         break;
                     case AudioType.SE:
                         fadeVolumeStartValue = LucidAudio.SEVolume == 0 ? 1 : (audioSource.volume / LucidAudio.SEVolume);
+                        break;
+                    case AudioType.SpatialSE:
+                        fadeVolumeStartValue = LucidAudio.SpatialVolume == 0 ? 1 : (audioSource.volume / LucidAudio.SpatialVolume);
                         break;
                 }
                 fadeVolumeEndValue = endValue;

@@ -32,9 +32,27 @@ namespace AnnulusGames.LucidTools.Audio
 
         public static float BGMVolume { get; set; } = 1f;
         public static float SEVolume { get; set; } = 1f;
+        public static float SpatialVolume { get; set; } = 1f;
 
-        public static AudioMixerGroup defaultBGMMixerGroup = null;
-        public static AudioMixerGroup defaultSEMixerGroup = null;
+        public static AudioMixerGroup defaultBGMMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.BGM];
+            set => MixerGroups[(int)AudioType.BGM] = value;
+        }
+
+        public static AudioMixerGroup defaultSEMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.SE];
+            set => MixerGroups[(int)AudioType.SE] = value;
+        }
+
+        public static AudioMixerGroup defaultSpatialSEMixerGroup
+        {
+            get => MixerGroups[(int)AudioType.SpatialSE];
+            set => MixerGroups[(int)AudioType.SpatialSE] = value;
+        }
+        
+        public static readonly AudioMixerGroup[] MixerGroups = new AudioMixerGroup[3];
 
         public static AudioPlayer[] GetPlayers()
         {
@@ -53,7 +71,7 @@ namespace AnnulusGames.LucidTools.Audio
 
         public static AudioPlayer Play(AudioType type, AudioClip clip, float fadeInDuration = 0f)
         {
-            return LucidAudioManager.Instance.Play(type, clip, fadeInDuration).SetAudioMixerGroup(defaultSEMixerGroup);
+            return LucidAudioManager.Instance.Play(type, clip, fadeInDuration).SetAudioMixerGroup(MixerGroups[(int)type]);
         }
 
         public static AudioPlayer PlayBGM(AudioClip clip, float fadeInDuration = 0f)
@@ -64,7 +82,10 @@ namespace AnnulusGames.LucidTools.Audio
         {
             return Play(AudioType.SE, clip, fadeInDuration);
         }
-        
+        public static AudioPlayer PlaySpatial(AudioClip clip, float fadeInDuration = 0f)
+        {
+            return Play(AudioType.SpatialSE, clip, fadeInDuration);
+        }
         public static void RestartAllBGM()
         {
             LucidAudioManager.Instance.Restart(AudioType.BGM);
@@ -84,7 +105,10 @@ namespace AnnulusGames.LucidTools.Audio
         {
             LucidAudioManager.Instance.Restart(AudioType.SE);
         }
-
+        public static void RestartAllSpatial()
+        {
+            LucidAudioManager.Instance.Restart(AudioType.SpatialSE);
+        }
         public static void RestartAllSE(AudioClip clip)
         {
             LucidAudioManager.Instance.Restart(AudioType.SE, clip);
@@ -99,6 +123,7 @@ namespace AnnulusGames.LucidTools.Audio
         {
             RestartAllBGM();
             RestartAllSE();
+            RestartAllSpatial();
         }
 
         public static void RestartAll(AudioClip clip)
@@ -117,7 +142,6 @@ namespace AnnulusGames.LucidTools.Audio
         {
             LucidAudioManager.Instance.Stop(AudioType.BGM);
         }
-
         public static void StopAllBGM(float fadeOutDuration)
         {
             LucidAudioManager.Instance.Stop(AudioType.BGM, null, null, fadeOutDuration);
@@ -172,11 +196,15 @@ namespace AnnulusGames.LucidTools.Audio
         {
             LucidAudioManager.Instance.Stop(AudioType.SE, null, id, fadeOutDuration);
         }
-
+        public static void StopAllSpatial()
+        {
+            LucidAudioManager.Instance.Stop(AudioType.SpatialSE);
+        }
         public static void StopAll()
         {
             StopAllBGM();
             StopAllSE();
+            StopAllSpatial();
         }
 
         public static void StopAll(float fadeOutDuration)
@@ -212,6 +240,10 @@ namespace AnnulusGames.LucidTools.Audio
         public static void PauseAllBGM()
         {
             LucidAudioManager.Instance.Pause(AudioType.BGM);
+        }        
+        public static void PauseAllSpatial()
+        {
+            LucidAudioManager.Instance.Pause(AudioType.SpatialSE);
         }
 
         public static void PauseAllBGM(float fadeOutDuration)
@@ -273,6 +305,7 @@ namespace AnnulusGames.LucidTools.Audio
         {
             PauseAllBGM();
             PauseAllSE();
+            PauseAllSpatial();
         }
 
         public static void PauseAll(float fadeOutDuration)
@@ -309,7 +342,10 @@ namespace AnnulusGames.LucidTools.Audio
         {
             LucidAudioManager.Instance.UnPause(AudioType.BGM);
         }
-
+        public static void UnPauseAllSpatial()
+        {
+            LucidAudioManager.Instance.UnPause(AudioType.SpatialSE);
+        }
         public static void UnPauseAllBGM(float fadeInDuration)
         {
             LucidAudioManager.Instance.UnPause(AudioType.BGM, null, null, fadeInDuration);
@@ -369,6 +405,7 @@ namespace AnnulusGames.LucidTools.Audio
         {
             UnPauseAllBGM();
             UnPauseAllSE();
+            UnPauseAllSpatial();
         }
 
         public static void UnPauseAll(float fadeInDuration)

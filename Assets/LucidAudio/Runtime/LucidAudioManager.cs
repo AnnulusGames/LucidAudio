@@ -25,6 +25,7 @@ namespace AnnulusGames.LucidTools.Audio
         internal static bool isInstanceNull => instance == null;
 
         private Queue<AudioSource> seSourcePool = new Queue<AudioSource>();
+        private Queue<AudioSource> spatialSourcePool = new Queue<AudioSource>();
         private Queue<AudioSource> bgmSourcePool = new Queue<AudioSource>();
         private List<AudioPlayer> activeAudioPlayers = new List<AudioPlayer>();
         private List<AudioPlayer> waitingAudioPlayers = new List<AudioPlayer>();
@@ -177,6 +178,7 @@ namespace AnnulusGames.LucidTools.Audio
             {
                 case AudioType.BGM: return bgmSourcePool;
                 case AudioType.SE: return seSourcePool;
+                case AudioType.SpatialSE: return spatialSourcePool;
             }
             return null;
         }
